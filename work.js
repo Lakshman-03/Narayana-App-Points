@@ -6,7 +6,7 @@ import session from "express-session";
 import passport from "passport";
 import { Strategy } from "passport-local";
 const app = express();
-const port = 3000;
+const port = 10000;
 env.config();
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended : true}))
