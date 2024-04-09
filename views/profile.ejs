@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Paytone+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Hammersmith+One&family=Paytone+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Hammersmith+One&family=Lexend+Deca:wght@100..900&family=Paytone+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/profile.css">
+</head>
+<body>
+
+    <nav>
+        <img src="#">
+        <label class="title">APP(TEMP)</label>
+        <ul>
+         <li><a class="active" href="">DASH BOARD</a></li>
+         <li><a href="">REQUEST</a></li>
+         <li><a href="">N'BOT</a></li>
+         <li><a href="">ABOUT</a></li>
+         <li><a href="">CERTIFICATES</a></li>
+        </ul>
+ 
+     </nav>
+     <div class="container" id="container">
+        
+        <div class="form-container tea"> 
+            <form>
+                <div class="profile">
+                  <img src="/images/<%= locals.image %>" class="pp">
+                </div>
+                <!-- <input type="email" placeholder="Enter your email">
+                
+                    <input type="password" placeholder="Enter your password"> -->
+                    <div class="details">
+                        <ul>
+                            <li>NAME : <span class="dname"><%= locals.name %></span></li>
+                            <li>ROLL NO :<span class="dname"><%= locals.rollNo %></span></li>
+                            <li>BRANCH :<span class="dname"><%= locals.branch %></span></li>
+                            <li>SECTION :<span class="dname"><%= locals.section %></span></li>
+                            <li>YEAR :<span class="dname"><%= locals.year %> RD YEAR</span></li>
+                            <li>SEMESTER :<span class="dname"><%= locals.sem %></span></li>
+                            <li>CONTACT : <%= locals.contact %> </li>
+                            <li>EMAIL :<span class="dname"><%= locals.email %> </span></li>
+                        </ul>
+                   
+
+                    </div>
+
+            </form>
+        </div>
+        <div class="side-container">
+            <div class="side">
+            
+                <div class="side-panel side-right">
+                    <h1>PROGRESS</h1>
+                    <div class="containerp">
+                        <div class="circular-progress">
+                          <div class="value-container">0%</div>
+                        </div>
+                      </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+    <button class="app-details">APP Details</button>
+    
+   <a href="./login.html" class="logout"> <button class="log-out">Log Out</button></a>
+  
+<script>
+    let progressBar = document.querySelector(".circular-progress");
+let valueContainer = document.querySelector(".value-container");
+
+let progressValue = 0;
+let progressEndValue = 100;
+let speed = 50;
+
+let progress = setInterval(() => {
+  progressValue++;
+  valueContainer.textContent = progressValue;
+  progressBar.style.background = `conic-gradient(
+    #00f9fd ${progressValue * 3.6}deg,
+    #023e8d ${progressValue * 3.6}deg
+  )`;
+  if (progressValue == progressEndValue) {
+    clearInterval(progress);
+  }
+}, speed);
+
+</script>
+</body>
+</html>

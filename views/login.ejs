@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/login.css">
+    <title>College</title>
+</head>
+<body>
+    <div class="main-Container">
+        <div class="container" id="container">
+            <div class="form-container std"> 
+                <form method="post" action="/student-login" onsubmit="return validateForm()">
+                    <h1>Student Login</h1>
+                    <input type="email" id="email"  name="username" placeholder="Enter your email" required="true">
+                    <input type="password" id="password" name="password"  placeholder="Enter your password" required="true"  onblur="validatePassword()">
+                    <img src="./eyeOpen.png" alt="eye" id="eye" onclick="showPassword()" width="25px" height="25px">
+                    <label style="color: red;"><%= locals.message %></label>
+                    <label style="color: red;"></label>
+                    <button type="submit">Log In</button>
+                </form>
+            </div>
+            <div class="form-container tea"> 
+                <form method="post" action="/teacher-login">
+                    <h1>Teacher Login</h1>
+                    <input type="email"  name="email" placeholder="Enter your email" required="true">
+                    <input type="password"  name="password"  placeholder="Enter your password" required="true">
+                    <button>Log In</button>
+                </form>
+            </div>
+            <div class="side-container">
+                <div class="side">
+                    <div class="side-panel side-left">
+                        <h1>Welcome!</h1>
+                        <p>Login to view your APP details.</p>
+                        <p>------------------------------</p>
+                        <button class="transform" id="student">TEACHER</button>
+                    </div>
+                    <div class="side-panel side-right">
+                        <h1>Welcome!</h1>
+                        <p>Login to manage students APP details.</p>
+                        <p>------------------------------</p>
+                        <button class="transform" id="teacher">STUDENT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    
+<script>
+    const container = document.getElementById('container');
+    const registerBtn = document.getElementById('teacher');
+    const loginBtn = document.getElementById('student');
+
+    registerBtn.addEventListener('click', () => {
+        container.classList.add("active");
+    });
+
+    loginBtn.addEventListener('click', () => {
+        container.classList.remove("active");
+    });
+
+    let val = "<%= locals.act %>"
+    if(val=="active"){
+        container.classList.add("active");
+    }else{
+        container.classList.remove("active");
+    }
+
+
+    function showPassword()
+        {
+            var password=document.getElementById("password");
+            var eye=document.getElementById("eye");
+            if(password.type==="password")
+            {
+                password.type="text";
+                eye.src="./eyeClose.png";
+            }
+            else
+            {
+                password.type="password";
+                eye.src="./eyeOpen.png";
+            }
+        }
+        function validateForm()
+        {
+            var username=document.getElementById("email").value;
+            var atposition=username.indexOf("@");   
+            var dotposition=username.lastIndexOf(".");
+            if(username==null || username=="")
+            {  
+                alert("Name can't be blank");  
+                return false;
+            }
+            if(atposition<1 || dotposition<atposition+2 || dotposition+2>=username.length)
+            {   
+                alert("Please enter a valid email address \n atpostion:"+atposition+"\n dotposition:"+dotposition);   
+                return false;      
+            }
+            var password=document.getElementById("password").value;
+            var hasDigit=false;
+            var hasUpperCase=false;
+            var hasLowerCase=false;
+            var hasSpecialChar=false;
+            var specialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+            if(password.length<6)
+            {  
+                alert("Password must be at least 6 characters long.");  
+                return false;  
+            }
+            else if(password.length>15)
+            {  
+                alert("Password must be at most 15 characters long.");  
+                return false;  
+            }
+            else if(password.length>=6&&password.length<=15)
+            {
+                for(var i=0;i<password.length;i++)
+                {
+                    if(password[i]>='0' && password[i]<='9')
+                    {
+                        hasDigit=true;
+                    }
+                    if(password[i]>='A' && password[i]<='Z')
+                    {
+                        hasUpperCase=true;
+                    }
+                    if(password[i]>='a' && password[i]<='z')
+                    {
+                        hasLowerCase=true;
+                    }
+                    if(specialChar.test(password[i]))
+                    {
+                        hasSpecialChar=true;
+                    }
+                }
+                if(!hasDigit)
+                {
+                    alert("Password must contain at least one digit.");
+                    return false;
+                }
+                if(!hasUpperCase)
+                {
+                    alert("Password must contain at least one uppercase letter.");
+                    return false;
+                }
+                if(!hasLowerCase)
+                {
+                    alert("Password must contain at least one lowercase letter.");
+                    return false;
+                }
+                if(!hasSpecialChar)
+                {
+                    alert("Password must contain at least one special character.");
+                    return false;
+                }
+            }
+            return true;
+        }
+        function validatePassword(){
+            var password=document.getElementById("password").value;
+            var hasDigit=false;
+            var hasUpperCase=false;
+            var hasLowerCase=false;
+            var hasSpecialChar=false;
+            var len=password.length;
+            var alertLabel=document.getElementsByTagName("label")[0];
+            var specialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+            if(password.length<6)
+            {  
+                alertLabel.innerHTML="Password must be at least 6 characters long.";
+            }
+            else if(password.length>15)
+            {  
+                alertLabel.innerHTML="Password must be at most 15 characters long.";
+            }
+            else if(password.length>=6&&password.length<=15)
+            {
+                for(var i=0;i<password.length;i++)
+                {
+                    if(password[i]>='0' && password[i]<='9')
+                    {
+                        hasDigit=true;
+                    }
+                    if(password[i]>='A' && password[i]<='Z')
+                    {
+                        hasUpperCase=true;
+                    }
+                    if(password[i]>='a' && password[i]<='z')
+                    {
+                        hasLowerCase=true;
+                    }
+                    if(specialChar.test(password[i]))
+                    {
+                        hasSpecialChar=true;
+                    }
+                }
+                if(!hasDigit&&!hasUpperCase&&!hasLowerCase&&!hasSpecialChar)
+                {
+                    alertLabel.innerHTML="Password must contain at least one digit, one uppercase letter, one lowercase letter and one special character.";
+                }
+                else if(!hasDigit&&!hasUpperCase&&!hasLowerCase)
+                {
+                    alertLabel.innerHTML="Password must contain at least one digit, one uppercase letter and one lowercase letter.";
+                }
+                else if(!hasDigit&&!hasUpperCase&&!hasSpecialChar)
+                {
+                    alertLabel.innerHTML="Password must contain at least one digit, one uppercase letter and one special character.";
+                }
+                else if(!hasDigit&&!hasLowerCase&&!hasSpecialChar)
+                {
+                    alertLabel.innerHTML="Password must contain at least one digit, one lowercase letter and one special character.";
+                }
+                else if(!hasUpperCase&&!hasLowerCase&&!hasSpecialChar)
+                {
+                    alertLabel.innerHTML="Password must contain at least one uppercase letter, one lowercase letter and one special character.";
+                }
+                else if(!hasDigit&&!hasUpperCase)
+                {
+                    alertLabel.innerHTML="Password must contain at least one digit and one uppercase letter.";
+                }
+                else if(!hasDigit&&!hasLowerCase)
+                {
+                    alertLabel.innerHTML="Password must contain at least one digit and one lowercase letter.";
+                }
+                else if(!hasDigit&&!hasSpecialChar)
+                {
+                    alertLabel.innerHTML="Password must contain at least one digit and one special character.";
+                }
+                else if(!hasUpperCase&&!hasLowerCase)
+                {
+                    alertLabel.innerHTML="Password must contain at least one uppercase letter and one lowercase letter.";
+                }
+                else if(!hasUpperCase&&!hasSpecialChar)
+                {
+                    alertLabel.innerHTML="Password must contain at least one uppercase letter and one special character.";
+                }
+                else if(!hasLowerCase&&!hasSpecialChar)
+                {
+                    alertLabel.innerHTML="Password must contain at least one lowercase letter and one special character.";
+                }
+                else if(!hasDigit&&!hasUpperCase)
+                {
+                    alertLabel.innerHTML="Password must contain at least one digit and one uppercase letter.";
+                }
+                else if(!hasDigit&&!hasLowerCase)
+                {
+                    alertLabel.innerHTML="Password must contain at least one digit and one lowercase letter.";
+                }
+                else if(!hasDigit&&!hasSpecialChar)
+                {
+                    alertLabel.innerHTML="Password must contain at least one digit and one special character.";
+                }
+                else if(!hasUpperCase&&!hasLowerCase)
+                {
+                    alertLabel.innerHTML="Password must contain at least one uppercase letter and one lowercase letter.";
+                }
+                else if(!hasUpperCase&&!hasSpecialChar)
+                {
+                    alertLabel.innerHTML="Password must contain at least one uppercase letter and one special character.";
+                }
+                else if(!hasLowerCase&&!hasSpecialChar)
+                {
+                    alertLabel.innerHTML="Password must contain at least one lowercase letter and one special character.";
+                }
+                else if(!hasDigit)
+                {
+                    alertLabel.innerHTML="Password must contain at least one digit.";
+                }
+                else if(!hasUpperCase)
+                {
+                    alertLabel.innerHTML="Password must contain at least one uppercase letter.";
+                }
+                else if(!hasLowerCase)
+                {
+                    alertLabel.innerHTML="Password must contain at least one lowercase letter.";
+                }
+                else if(!hasSpecialChar)
+                {
+                    alertLabel.innerHTML="Password must contain at least one special character.";
+                }
+                else
+                {
+                    alertLabel.innerHTML="";
+                }
+            }
+        }
+</script>
+</body>
+
+</html>

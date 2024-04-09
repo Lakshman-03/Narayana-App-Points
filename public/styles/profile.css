@@ -1,0 +1,360 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Outfit:wght@479&family=Overpass:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+*,
+*:before,
+*:after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lexend';
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration: none;
+
+    
+}
+
+body{
+ min-height: 200vh;
+ background-color: #c9d6ff;
+ background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+}
+nav{
+    
+    background: linear-gradient(to right,rgb(13, 13, 121),rgb(46, 46, 226));
+
+    height: 70px;
+    width: 100%;
+
+}
+
+.profile{
+
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    background-color: #150274;
+    padding: 5px;
+    
+}
+
+.profile .pp{
+
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+    border: 2px solid white;
+    
+} 
+
+label.title{
+
+    color: white;
+    font-size: 25px;
+    line-height: 75px;
+    padding: 0 50px;
+    font-weight: bold;
+
+
+}
+
+nav ul{
+
+    float: right;
+    margin-right: 50px;
+}
+
+nav ul li{
+
+    display: inline-block;
+    list-style: none;
+    text-decoration: none;
+    line-height: 80px;
+    margin: 0 20px;
+    position: relative;
+    
+}
+
+nav ul li a{
+
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    padding: 5px 13px;
+    border-radius: 3px;
+    
+
+}
+
+nav ul li:after{
+    content: '';
+    width: 0;
+    height: 1px;
+    background: #ffffff;
+    position: absolute;
+    left: 0;
+    bottom: 1px;
+    transition: 0.5s;
+    margin-bottom: 20px;
+  }
+  nav ul li:hover::after{
+    width:100%;
+  }
+
+a:active{
+
+    /* background: rgba(88, 88, 240, 0.422); */
+    background: #023e8d;
+}
+
+.container{
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    min-height: 480px;
+}
+.details ul{
+
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100px;
+    font-style: normal;
+}
+
+.circular-progress {
+    margin-top: 30px;
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+  }
+  .circular-progress:before {
+    content: "";
+    position: absolute;
+    height: 84%;
+    width: 84%;
+    background-color: #ffffff;
+    border-radius: 50%;
+  }
+  .value-container {
+    position: relative;
+    font-family: "Poppins", sans-serif;
+    font-size: 30px;
+    color: #07144f;
+  }
+  
+.container p{
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin: 20px 0;
+}
+.side-panel h{
+
+    margin-top: 500p;
+}
+
+.container button{
+    background-color: rgb(17, 10, 110);
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.container button.transform{
+    background-color: transparent;
+    border-color: #fff;
+}
+
+.container form{
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+}
+
+.container input{
+    background-color: #eee;
+    border: none;
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+}
+
+
+.log-out{
+    position: absolute;
+    height: 40px;
+    width: 120px;
+    margin-top: 100px;
+    cursor: pointer;
+    margin-left: 45%;
+    outline: none;
+    background-color: #f12020;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    
+}
+.app-details{
+    position: absolute;
+    height: 40px;
+    width: 120px;
+    margin-top: 50px;
+    cursor: pointer;
+    margin-left: 45%;
+    outline: none;
+    background-color: #2081f1;
+    border: none;
+    border-radius: 20px;
+    color: white;
+}
+
+.form-container{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.details{
+    margin-top: 30px;
+    line-height: 30px;
+}
+.tea{
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.container.active .tea{
+    transform: translateX(100%);
+}
+
+.details ul li span{
+
+    font-family: 'Lexend Deca';
+    
+}
+.details ul li{
+
+    font-family: 'Hammersmith One';
+    
+}
+.std{
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.active .std{
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: move 0.6s;
+}
+
+@keyframes move{
+    0%, 49.99%{
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100%{
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+
+.side-container{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    border-radius: 150px 0 0 100px;
+    z-index: 1000;
+}
+
+.container.active .side-container{
+    transform: translateX(-100%);
+    border-radius: 0 150px 100px 0;
+}
+
+.side{
+    background-color: rgb(31, 10, 123);
+    height: 100%;
+    background: linear-gradient(to right, #150274, #2081f1);
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(10px);
+    transition: all 0.6s ease-in-out;
+}
+
+.container.active .side{
+    transform: translateX(50%);
+}
+
+.side-panel{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 30px;
+    text-align: center;
+    top: 0;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.side-left{
+    transform: translateX(-200%);
+}
+
+.container.active .side-left{
+    transform: translateX(0);
+}
+
+.side-right{
+    right: 0;
+    transform: translateX(0);
+}
+
+.container.active .side-right{
+    transform: translateX(700%);
+}
