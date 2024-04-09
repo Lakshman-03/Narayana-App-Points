@@ -1,12 +1,13 @@
 import express from "express";
 import bodyParser from "body-parser";
+import  env from "dotenv";
 import pg from "pg";
 import session from "express-session";
 import passport from "passport";
 import { Strategy } from "passport-local";
 const app = express();
 const port = 3000;
-
+env.config();
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(session({
@@ -20,11 +21,11 @@ app.use(passport.initialize())
 app.use(passport.session())
   
 const db =new  pg.Client({
-    user: "postgres",
-    database : "college",
-    port: 5432,
-    host:"localhost",
-    password: "Lakshman@123"
+    user: process.env.USER,
+    database : process.env.DATABASE,
+    port: process.env.PORT,
+    host:process.env.HOST,
+    password: process.env.PASSWORD
 })
 
 db.connect();
