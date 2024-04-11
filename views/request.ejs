@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/request.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <img src="#">
+        <label class="title">APP(TEMP)</label>
+        <ul>
+         <li><a class="active" href="/Authentication">DASH BOARD</a></li>
+         <li><a href="/request">REQUEST</a></li>
+         <li><a href="/nbot">N'BOT</a></li>
+         <li><a href="/about">ABOUT</a></li>
+         <li><a href="/logout">LOG OUT</a></li>
+        </ul>
+ 
+     </nav>
+    <form method="post" action="">
+    <div class = 'wrapper'>
+        <div class = "upload">
+            <div class = "upload-wrapper">
+               <label for="activity">Enter name of the activity</label>
+                <input type="text">
+               <label for="nature">Enter nature of the activity</label>
+               <input type="text">
+               <label for="location">Location of the activivty conducted</label>
+               <input type="text">
+               <label for="date">Date of the activivty conducted</label>
+               <input type="text">
+               <label>Description :</label>
+               <textarea id="text-area" name="text-area" rows="4" cols="50"></textarea>
+                <div class = "upload-img">
+                   
+                </div>
+                <div class = "upload-info">
+                    <p>
+                        <span class = "upload-info-value">0</span> file(s) uploaded.
+                    </p>
+                </div>
+                <div class = "upload-area">
+                    <div class = "upload-area-img">
+                        <img src = "/images/upload.png">
+                    </div>
+                    <p class = "upload-area-text">Select images or <span>browse</span>.</p>
+                </div>
+                <input type = "file" class = "visually-hidden" id = "upload-input" multiple>
+                <input type="submit" name="submit" value="submit" id="sub-btn">
+            </div>
+        </div>
+       
+    </div></form>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector(".upload-area").addEventListener("click", function() {
+        document.getElementById('upload-input').click();
+    });
+
+    document.getElementById('upload-input').addEventListener("change", function(event) {
+        if (event.target.files) {
+            let filesAmount = event.target.files.length;
+            document.querySelector('.upload-img').innerHTML = "";
+
+            for (let i = 0; i < filesAmount; i++) {
+                let reader = new FileReader();
+                reader.onload = function(event) {
+                    let html = `
+                        <div class="uploaded-img">
+                            <img src="${event.target.result}">
+                            <button type="button" class="remove-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                    document.querySelector(".upload-img").insertAdjacentHTML('beforeend', html);
+                }
+                reader.readAsDataURL(event.target.files[i]);
+            }
+
+            document.querySelector('.upload-info-value').textContent = filesAmount;
+            document.querySelector('.upload-img').style.padding = "20px";
+        }
+    });
+
+    window.addEventListener("click", function(event) {
+        if (event.target.classList.contains('remove-btn')) {
+            event.target.parentNode.remove();
+        } else if (event.target.parentNode.classList.contains('remove-btn')) {
+            event.target.parentNode.parentNode.remove();
+        }
+    });
+});
+
+    </script>
+</body>
+</html>

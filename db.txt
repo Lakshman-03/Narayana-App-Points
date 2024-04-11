@@ -1,0 +1,9 @@
+Password     sXCuyy7xV5olx6TrQKXQmmJEcT9WEeDr
+InternalDatabaseURL   postgres://root:sXCuyy7xV5olx6TrQKXQmmJEcT9WEeDr@dpg-cob2qav79t8c73bn5lm0-a/college_c16g
+External Database URL            postgres://root:sXCuyy7xV5olx6TrQKXQmmJEcT9WEeDr@dpg-cob2qav79t8c73bn5lm0-a.singapore-postgres.render.com/college_c16g
+PSQL Command           PGPASSWORD=sXCuyy7xV5olx6TrQKXQmmJEcT9WEeDr psql -h dpg-cob2qav79t8c73bn5lm0-a.singapore-postgres.render.com -U root college_c16g
+
+
+
+create table student(id varchar(10),name text,year varchar(10),branch varchar(5),contact varchar(13),email varchar(35),password text,section varchar(3),profilePic text)
+"insert into student values($1,$2,$3,$4,$5,$6,$7,$8,$9)",['21711A05F0','Lakshman','III','CSE','9652376266','lakshhman@gmail.com','Lakshman@123','C','none']

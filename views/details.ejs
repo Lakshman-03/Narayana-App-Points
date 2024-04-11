@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/styles/details.css">
+</head>
+
+<body>
+    <nav>
+        <img src="#">
+        <label class="title">APP(TEMP)</label>
+        <ul>
+         <li><a class="active" href="/Authentication">DASH BOARD</a></li>
+         <li><a href="/request">REQUEST</a></li>
+         <li><a href="/nbot">N'BOT</a></li>
+         <li><a href="/about">ABOUT</a></li>
+         <li><a href="/logout">LOG OUT</a></li>
+        </ul>
+ 
+     </nav>
+    <main class="table" id="app_table">
+        <section class="table__header">
+            <h1>STUDENT APP</h1>
+            <div class="input-group">
+                <input type="search" placeholder="Search Here...">
+                <img src="/images/search.png" alt="">
+            </div>
+
+            <div class="pro__file">
+                <img for="pro-file" class="pro__file-btn" src="/images/21711A0562.jpg">
+            </div>
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Id <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Activity <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Nature<span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Location <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Date <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> APG <span class="icon-arrow">&UpArrow;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span>1</span></td>
+                        <td><span>toji fight</span></td>
+                        <td> <span>hidden inventory club</span> </td>
+                        <td><span>tokyo</span> </td>
+                        <td>
+                            <span>01/04/2024</span>
+                        </td>
+                        <td> <span class="points">4</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>2</span></td>
+                        <td><span>jogo fight</span></td>
+                        <td> <span>jujutsu high club</span> </td>
+                        <td><span>tokyo</span> </td>
+                        <td>
+                            <span>02/04/2024</span>
+                        </td>
+                        <td> <span class="points">2</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>3</span></td>
+                        <td><span>six eyes</span></td>
+                        <td> <span>childhood club</span> </td>
+                        <td><span>masara</span> </td>
+                        <td>
+                            <span>03/04/2024</span>
+                        </td>
+                        <td> <span class="points">4</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>4</span></td>
+                        <td><span>prison realm</span></td>
+                        <td> <span>shibuya club</span> </td>
+                        <td><span>shibuya</span> </td>
+                        <td>
+                            <span>03/04/2024</span>
+                        </td>
+                        <td> <span class="points">3</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>5</span></td>
+                        <td><span>yuji undertaking</span></td>
+                        <td> <span>jujutsu high club</span> </td>
+                        <td><span>tokyo</span> </td>
+                        <td>
+                            <span>03/04/2024</span>
+                        </td>
+                        <td> <span class="points">5</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>6</span></td>
+                        <td><span>geto friendship cut</span></td>
+                        <td> <span>hidden inventory club</span> </td>
+                        <td><span>kfc steet</span> </td>
+                        <td>
+                            <span>04/04/2024</span>
+                        </td>
+                        <td> <span class="points">3</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>7</span></td>
+                        <td><span>killing geto</span></td>
+                        <td> <span>movie 0 club</span> </td>
+                        <td><span>temple</span> </td>
+                        <td>
+                            <span>01/04/2024</span>
+                        </td>
+                        <td> <span class="points">5</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>8</span></td>
+                        <td><span>battle with sukuna</span></td>
+                        <td> <span>manga club</span> </td>
+                        <td><span>tokyo</span> </td>
+                        <td>
+                            <span>01/04/2024</span>
+                        </td>
+                        <td> <span class="points">5</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>9</span></td>
+                        <td><span>fifity fifty</span></td>
+                        <td> <span>manga club</span> </td>
+                        <td><span>tokyo</span> </td>
+                        <td>
+                            <span>01/04/2024</span>
+                        </td>
+                        <td> <span class="points">2</span></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <div class="sem-total">
+        <p>TOTAL SEM POINTS : <span>3</span></p>
+    </div>
+    <div class="year-down">
+        <form action="" method="post">
+            <label for="years">Choose a Year:</label>
+            <select name="years" id="years">
+              <option value="y11">1st Year | 1st Sem</option>
+              <option value="y12">1st Year | 2nd Sem</option>
+              <option value="y21">2nd Year | 1st Sem</option>
+              <option value="y22">2nd Year | 2nd Sem</option>
+              <option value="y31">3rd Year | 1st Sem</option>
+              <option value="y32">3rd Year | 2nd Sem</option>
+              <option value="y41">4th Year | 1st Sem</option>
+              <option value="y41">4th Year | 2nd Sem</option>
+            </select>
+            <br><br>
+            <input type="submit" value="Submit">
+          </form>
+
+    </div>
+    
+      
+    <!-- <script src="./details.js"></script> -->
+    <script>
+        const search = document.querySelector('.input-group input'),
+    table_rows = document.querySelectorAll('tbody tr'),
+    table_headings = document.querySelectorAll('thead th');
+
+
+search.addEventListener('input', searchTable);
+
+function searchTable() {
+    table_rows.forEach((row, i) => {
+        let table_data = row.textContent.toLowerCase(),
+            search_data = search.value.toLowerCase();
+
+        row.classList.toggle('hide', table_data.indexOf(search_data) < 0);
+        row.style.setProperty('--delay', i / 25 + 's');
+    })
+
+    document.querySelectorAll('tbody tr:not(.hide)').forEach((visible_row, i) => {
+        visible_row.style.backgroundColor = (i % 2 == 0) ? 'transparent' : '#0000000b';
+    });
+}
+
+
+
+table_headings.forEach((head, i) => {
+    let sort_asc = true;
+    head.onclick = () => {
+        table_headings.forEach(head => head.classList.remove('active'));
+        head.classList.add('active');
+
+        document.querySelectorAll('td').forEach(td => td.classList.remove('active'));
+        table_rows.forEach(row => {
+            row.querySelectorAll('td')[i].classList.add('active');
+        })
+
+        head.classList.toggle('asc', sort_asc);
+        sort_asc = head.classList.contains('asc') ? false : true;
+
+        sortTable(i, sort_asc);
+    }
+})
+
+
+function sortTable(column, sort_asc) {
+    [...table_rows].sort((a, b) => {
+        let first_row = a.querySelectorAll('td')[column].textContent.toLowerCase(),
+            second_row = b.querySelectorAll('td')[column].textContent.toLowerCase();
+
+        return sort_asc ? (first_row < second_row ? 1 : -1) : (first_row < second_row ? -1 : 1);
+    })
+        .map(sorted_row => document.querySelector('tbody').appendChild(sorted_row));
+}
+
+
+
+    </script>
+
+</body>
+
+</html>

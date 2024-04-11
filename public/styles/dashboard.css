@@ -1,5 +1,4 @@
 
-
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Outfit:wght@479&family=Overpass:ital,wght@0,100..900;1,100..900&display=swap');
 
 
@@ -17,6 +16,8 @@ body{
  min-height: 200vh;
  background-color: #c9d6ff;
  background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+ justify-content: center;
+ align-items: center;
 }
 nav{
     
@@ -94,7 +95,7 @@ a:active{
     justify-content: center;
     align-items: center;
     padding-top: 100px;
-    padding-left: 100px;
+    padding-left: 17%;
     gap: 150px;
 
    

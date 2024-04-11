@@ -358,3 +358,8 @@ a:active{
 .container.active .side-right{
     transform: translateX(700%);
 }
+
+.app-details a{
+
+    color: white;
+}
