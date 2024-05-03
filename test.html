@@ -3,241 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="public/styles/request.css">
     <title>Document</title>
 </head>
 <body>
-    <div class="container" id="container">
-        <div class="form-container std"> 
-            <form method="post" action="https://hianime.to" onsubmit="return validateForm()">
-                <h1>Student Login</h1>
-                <input type="text"  name="email" id="email" placeholder="Enter your email" required="true">
-                <input type="password"  name="password"  id="password" placeholder="Enter your password" required="true" onblur="validatePassword()">
-                <img src="./eyeOpen.png" alt="eye" id="eye" onclick="showPassword()" width="25px" height="25px">
-                <!-- <label style="color: red;"><%= locals.message %></label> -->
-                <label style="color: red;"></label>
-                <button type="submit">Log In</button>
-            </form>
+    <nav>
+        <img src="#">
+        <label class="title">APP(TEMP)</label>
+        <ul>
+         <li><a class="active" href="/Authentication">DASH BOARD</a></li>
+         <li><a href="/request">REQUEST</a></li>
+         <li><a href="/nbot">N'BOT</a></li>
+         <li><a href="/about">ABOUT</a></li>
+         <li><a href="/logout">LOG OUT</a></li>
+        </ul>
+ 
+     </nav>
+    <form method="post" action="/request123" enctype="multipart/form-data">
+    <div class = 'wrapper'>
+        <div class = "upload">
+            <div class = "upload-wrapper">
+               <label for="activity">Enter name of the activity</label>
+                <input type="text" name="activity">
+               <label for="nature">Enter nature of the activity</label>
+               <input type="text" name="nature">
+               <label for="location">Location of the activivty conducted</label>
+               <input type="text" name="location">
+               <label for="date">Date of the activivty conducted</label>
+               <input type="text" name="date">
+               <label for="position">Choose an option:</label>
+            <select name="position" id="position">
+              <option value="win">Winner</option>
+             
+              <option value="winself">Winner(Self)</option>
+              <option value="par">Participant</option>
+              <option value="parself">Participant(Self)</option>
+
+            </select>
+            <label for="mode">Activity Mode :</label>
+            <select name="mode" id="mode">
+              <option value="online">Online</option>
+             
+              <option value="Offline">Offline</option>
+            
+            </select>
+               <label>Description :</label>
+               <textarea id="text-area" name="text-area" rows="4" cols="50"></textarea>
+                <div class = "upload-img">
+                   
+                </div>
+                <div class = "upload-info">
+                    <p>
+                        <span class = "upload-info-value">0</span> file(s) uploaded.
+                    </p>
+                </div>
+                <div class = "upload-area">
+                    <div class = "upload-area-img">
+                        <img src = "/images/upload.png">
+                    </div>
+                    <p class = "upload-area-text">Select images or <span>browse</span>.</p>
+                </div>
+                <input type = "file" class = "visually-hidden" id = "upload-input" name="image"  multiple>
+                <input type="submit"  value="submit" id="sub-btn">
+            </div>
+            
         </div>
-    </div>
+       
+    </div></form>
+
     <script>
-        function showPassword()
-        {
-            var password=document.getElementById("password");
-            var eye=document.getElementById("eye");
-            if(password.type==="password")
-            {
-                password.type="text";
-                eye.src="./eyeClose.png";
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector(".upload-area").addEventListener("click", function() {
+        document.getElementById('upload-input').click();
+    });
+
+    document.getElementById('upload-input').addEventListener("change", function(event) {
+        if (event.target.files) {
+            let filesAmount = event.target.files.length;
+            document.querySelector('.upload-img').innerHTML = "";
+
+            for (let i = 0; i < filesAmount; i++) {
+                let reader = new FileReader();
+                reader.onload = function(event) {
+                    let html = `
+                        <div class="uploaded-img">
+                            <img src="${event.target.result}">
+                            <button type="button" class="remove-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                    document.querySelector(".upload-img").insertAdjacentHTML('beforeend', html);
+                }
+                reader.readAsDataURL(event.target.files[i]);
             }
-            else
-            {
-                password.type="password";
-                eye.src="./eyeOpen.png";
-            }
+
+            document.querySelector('.upload-info-value').textContent = filesAmount;
+            document.querySelector('.upload-img').style.padding = "20px";
         }
-        function validateForm()
-        {
-            var username=document.getElementById("email").value;
-            var atposition=username.indexOf("@");   
-            var dotposition=username.lastIndexOf(".");
-            if(username==null || username=="")
-            {  
-                alert("Name can't be blank");  
-                return false;
-            }
-            if(atposition<1 || dotposition<atposition+2 || dotposition+2>=username.length)
-            {   
-                alert("Please enter a valid email address \n atpostion:"+atposition+"\n dotposition:"+dotposition);   
-                return false;      
-            }
-            var password=document.getElementById("password").value;
-            var hasDigit=false;
-            var hasUpperCase=false;
-            var hasLowerCase=false;
-            var hasSpecialChar=false;
-            var specialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-            if(password.length<6)
-            {  
-                alert("Password must be at least 6 characters long.");  
-                return false;  
-            }
-            else if(password.length>15)
-            {  
-                alert("Password must be at most 15 characters long.");  
-                return false;  
-            }
-            else if(password.length>=6&&password.length<=15)
-            {
-                for(var i=0;i<password.length;i++)
-                {
-                    if(password[i]>='0' && password[i]<='9')
-                    {
-                        hasDigit=true;
-                    }
-                    if(password[i]>='A' && password[i]<='Z')
-                    {
-                        hasUpperCase=true;
-                    }
-                    if(password[i]>='a' && password[i]<='z')
-                    {
-                        hasLowerCase=true;
-                    }
-                    if(specialChar.test(password[i]))
-                    {
-                        hasSpecialChar=true;
-                    }
-                }
-                if(!hasDigit)
-                {
-                    alert("Password must contain at least one digit.");
-                    return false;
-                }
-                if(!hasUpperCase)
-                {
-                    alert("Password must contain at least one uppercase letter.");
-                    return false;
-                }
-                if(!hasLowerCase)
-                {
-                    alert("Password must contain at least one lowercase letter.");
-                    return false;
-                }
-                if(!hasSpecialChar)
-                {
-                    alert("Password must contain at least one special character.");
-                    return false;
-                }
-            }
-            return true;
+    });
+
+    window.addEventListener("click", function(event) {
+        if (event.target.classList.contains('remove-btn')) {
+            event.target.parentNode.remove();
+        } else if (event.target.parentNode.classList.contains('remove-btn')) {
+            event.target.parentNode.parentNode.remove();
         }
-        function validatePassword(){
-            var password=document.getElementById("password").value;
-            var hasDigit=false;
-            var hasUpperCase=false;
-            var hasLowerCase=false;
-            var hasSpecialChar=false;
-            var len=password.length;
-            var alertLabel=document.getElementsByTagName("label")[0];
-            var specialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-            if(password.length<6)
-            {  
-                alertLabel.innerHTML="Password must be at least 6 characters long.";
-            }
-            else if(password.length>15)
-            {  
-                alertLabel.innerHTML="Password must be at most 15 characters long.";
-            }
-            else if(password.length>=6&&password.length<=15)
-            {
-                for(var i=0;i<password.length;i++)
-                {
-                    if(password[i]>='0' && password[i]<='9')
-                    {
-                        hasDigit=true;
-                    }
-                    if(password[i]>='A' && password[i]<='Z')
-                    {
-                        hasUpperCase=true;
-                    }
-                    if(password[i]>='a' && password[i]<='z')
-                    {
-                        hasLowerCase=true;
-                    }
-                    if(specialChar.test(password[i]))
-                    {
-                        hasSpecialChar=true;
-                    }
-                }
-                if(!hasDigit&&!hasUpperCase&&!hasLowerCase&&!hasSpecialChar)
-                {
-                    alertLabel.innerHTML="Password must contain at least one digit, one uppercase letter, one lowercase letter and one special character.";
-                }
-                else if(!hasDigit&&!hasUpperCase&&!hasLowerCase)
-                {
-                    alertLabel.innerHTML="Password must contain at least one digit, one uppercase letter and one lowercase letter.";
-                }
-                else if(!hasDigit&&!hasUpperCase&&!hasSpecialChar)
-                {
-                    alertLabel.innerHTML="Password must contain at least one digit, one uppercase letter and one special character.";
-                }
-                else if(!hasDigit&&!hasLowerCase&&!hasSpecialChar)
-                {
-                    alertLabel.innerHTML="Password must contain at least one digit, one lowercase letter and one special character.";
-                }
-                else if(!hasUpperCase&&!hasLowerCase&&!hasSpecialChar)
-                {
-                    alertLabel.innerHTML="Password must contain at least one uppercase letter, one lowercase letter and one special character.";
-                }
-                else if(!hasDigit&&!hasUpperCase)
-                {
-                    alertLabel.innerHTML="Password must contain at least one digit and one uppercase letter.";
-                }
-                else if(!hasDigit&&!hasLowerCase)
-                {
-                    alertLabel.innerHTML="Password must contain at least one digit and one lowercase letter.";
-                }
-                else if(!hasDigit&&!hasSpecialChar)
-                {
-                    alertLabel.innerHTML="Password must contain at least one digit and one special character.";
-                }
-                else if(!hasUpperCase&&!hasLowerCase)
-                {
-                    alertLabel.innerHTML="Password must contain at least one uppercase letter and one lowercase letter.";
-                }
-                else if(!hasUpperCase&&!hasSpecialChar)
-                {
-                    alertLabel.innerHTML="Password must contain at least one uppercase letter and one special character.";
-                }
-                else if(!hasLowerCase&&!hasSpecialChar)
-                {
-                    alertLabel.innerHTML="Password must contain at least one lowercase letter and one special character.";
-                }
-                else if(!hasDigit&&!hasUpperCase)
-                {
-                    alertLabel.innerHTML="Password must contain at least one digit and one uppercase letter.";
-                }
-                else if(!hasDigit&&!hasLowerCase)
-                {
-                    alertLabel.innerHTML="Password must contain at least one digit and one lowercase letter.";
-                }
-                else if(!hasDigit&&!hasSpecialChar)
-                {
-                    alertLabel.innerHTML="Password must contain at least one digit and one special character.";
-                }
-                else if(!hasUpperCase&&!hasLowerCase)
-                {
-                    alertLabel.innerHTML="Password must contain at least one uppercase letter and one lowercase letter.";
-                }
-                else if(!hasUpperCase&&!hasSpecialChar)
-                {
-                    alertLabel.innerHTML="Password must contain at least one uppercase letter and one special character.";
-                }
-                else if(!hasLowerCase&&!hasSpecialChar)
-                {
-                    alertLabel.innerHTML="Password must contain at least one lowercase letter and one special character.";
-                }
-                else if(!hasDigit)
-                {
-                    alertLabel.innerHTML="Password must contain at least one digit.";
-                }
-                else if(!hasUpperCase)
-                {
-                    alertLabel.innerHTML="Password must contain at least one uppercase letter.";
-                }
-                else if(!hasLowerCase)
-                {
-                    alertLabel.innerHTML="Password must contain at least one lowercase letter.";
-                }
-                else if(!hasSpecialChar)
-                {
-                    alertLabel.innerHTML="Password must contain at least one special character.";
-                }
-                else
-                {
-                    alertLabel.innerHTML="";
-                }
-            }
-        }
-    </script>   
+    });
+});
+
+    </script>
 </body>
 </html>

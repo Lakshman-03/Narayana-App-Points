@@ -23,9 +23,11 @@
             <div class="form-container tea"> 
                 <form method="post" action="/teacher-login">
                     <h1>Teacher Login</h1>
-                    <input type="email"  name="email" placeholder="Enter your email" required="true">
-                    <input type="password"  name="password"  placeholder="Enter your password" required="true">
-                    <button>Log In</button>
+                    <input type="email" id="Temail"   name="username" placeholder="Enter your email" required="true">
+                    <input type="password" id="Tpassword" name="password"  placeholder="Enter your password" required="true" onblur="validatePassword()">
+                    <label style="color: red;"><%= locals.message %></label>
+                    <label style="color: red;"></label>
+                    <button type="submit">Log In</button>
                 </form>
             </div>
             <div class="side-container">

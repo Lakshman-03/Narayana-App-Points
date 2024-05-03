@@ -47,103 +47,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><span>1</span></td>
-                        <td><span>toji fight</span></td>
-                        <td> <span>hidden inventory club</span> </td>
-                        <td><span>tokyo</span> </td>
-                        <td>
-                            <span>01/04/2024</span>
-                        </td>
-                        <td> <span class="points">4</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>2</span></td>
-                        <td><span>jogo fight</span></td>
-                        <td> <span>jujutsu high club</span> </td>
-                        <td><span>tokyo</span> </td>
-                        <td>
-                            <span>02/04/2024</span>
-                        </td>
-                        <td> <span class="points">2</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>3</span></td>
-                        <td><span>six eyes</span></td>
-                        <td> <span>childhood club</span> </td>
-                        <td><span>masara</span> </td>
-                        <td>
-                            <span>03/04/2024</span>
-                        </td>
-                        <td> <span class="points">4</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>4</span></td>
-                        <td><span>prison realm</span></td>
-                        <td> <span>shibuya club</span> </td>
-                        <td><span>shibuya</span> </td>
-                        <td>
-                            <span>03/04/2024</span>
-                        </td>
-                        <td> <span class="points">3</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>5</span></td>
-                        <td><span>yuji undertaking</span></td>
-                        <td> <span>jujutsu high club</span> </td>
-                        <td><span>tokyo</span> </td>
-                        <td>
-                            <span>03/04/2024</span>
-                        </td>
-                        <td> <span class="points">5</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>6</span></td>
-                        <td><span>geto friendship cut</span></td>
-                        <td> <span>hidden inventory club</span> </td>
-                        <td><span>kfc steet</span> </td>
-                        <td>
-                            <span>04/04/2024</span>
-                        </td>
-                        <td> <span class="points">3</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>7</span></td>
-                        <td><span>killing geto</span></td>
-                        <td> <span>movie 0 club</span> </td>
-                        <td><span>temple</span> </td>
-                        <td>
-                            <span>01/04/2024</span>
-                        </td>
-                        <td> <span class="points">5</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>8</span></td>
-                        <td><span>battle with sukuna</span></td>
-                        <td> <span>manga club</span> </td>
-                        <td><span>tokyo</span> </td>
-                        <td>
-                            <span>01/04/2024</span>
-                        </td>
-                        <td> <span class="points">5</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>9</span></td>
-                        <td><span>fifity fifty</span></td>
-                        <td> <span>manga club</span> </td>
-                        <td><span>tokyo</span> </td>
-                        <td>
-                            <span>01/04/2024</span>
-                        </td>
-                        <td> <span class="points">2</span></td>
-                    </tr>
+                    <% locals.data.forEach(value => { 
+                        count++; 
+                        total = parseInt(value.apg) +parseInt(total);
+                        %>
+                        <tr>
+                            <td><span><%= count %></span></td>
+                            <td><span><%= value.activity %></span></td>
+                            <td> <span><%= value.nature %></span> </td>
+                            <td><span><%= value.location %></span> </td>
+                            <td>
+                                <% const date = (value.date.toString()).substring(0,15) %>
+                                <span><%= date %></span>
+                            </td>
+                            <td> <span class="points"><%= value.apg %></span></td>
+                        </tr>
+                    <% }) %>
+                    
+                    
+
                     
                 </tbody>
             </table>
         </section>
     </main>
     <div class="sem-total">
-        <p>TOTAL SEM POINTS : <span>3</span></p>
+        <p>TOTAL SEM POINTS : <span><%= total %> </span></p>
     </div>
     <div class="year-down">
         <form action="" method="post">
@@ -165,7 +94,7 @@
     </div>
     
       
-    <!-- <script src="./details.js"></script> -->
+    
     <script>
         const search = document.querySelector('.input-group input'),
     table_rows = document.querySelectorAll('tbody tr'),

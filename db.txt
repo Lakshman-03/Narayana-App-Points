@@ -1,9 +1,70 @@
-Password     sXCuyy7xV5olx6TrQKXQmmJEcT9WEeDr
-InternalDatabaseURL   postgres://root:sXCuyy7xV5olx6TrQKXQmmJEcT9WEeDr@dpg-cob2qav79t8c73bn5lm0-a/college_c16g
-External Database URL            postgres://root:sXCuyy7xV5olx6TrQKXQmmJEcT9WEeDr@dpg-cob2qav79t8c73bn5lm0-a.singapore-postgres.render.com/college_c16g
-PSQL Command           PGPASSWORD=sXCuyy7xV5olx6TrQKXQmmJEcT9WEeDr psql -h dpg-cob2qav79t8c73bn5lm0-a.singapore-postgres.render.com -U root college_c16g
 
 
+create table student(
+id varchar(10) primary key,
+name text,
+year varchar(10),
+branch varchar(5),
+contact varchar(13),
+email varchar(35),
+password text,
+section varchar(3),
+profilePic text
+)
 
-create table student(id varchar(10),name text,year varchar(10),branch varchar(5),contact varchar(13),email varchar(35),password text,section varchar(3),profilePic text)
 "insert into student values($1,$2,$3,$4,$5,$6,$7,$8,$9)",['21711A05F0','Lakshman','III','CSE','9652376266','lakshhman@gmail.com','Lakshman@123','C','none']
+
+create table certificate(
+id serial primary key,
+currentSem varchar(5),
+student_id varchar(10),
+activity text,
+nature text,
+location text,
+date date,
+apg varchar(5),
+certificate_type text,
+approval_status varchar(10)
+foreign key(student_id) references student(id)
+)
+
+
+
+
+select (student_id,nature,apg,approval_status,currentsem,activity) from student
+join certificate on student.id= certificate.student_id
+ where approval_status = 'false' and student_id = '21711A05F0';
+
+create table teacher(
+id varchar(10) primary key,
+name text,
+email varchar(30) unique,
+phone varchar(13),
+img text,
+role text,
+password text default 'Teacher@123@',
+dept varchar(5),
+teach_sem varchar(5) unique,
+teach_sec varchar(5) unique,
+teach_year varchar(10) unique, 
+req_id text
+)
+
+
+
+create table student(
+id varchar(10) primary key,
+name text,
+year varchar(10),
+sem varchar(5),
+branch varchar(5),
+contact varchar(13),
+email varchar(35) unique,
+password text default 'Student@123',
+section varchar(3),
+profile_pic text,
+req_id varchar(10),
+foreign key(sem) references teacher(teach_sem),
+foreign key(section) references teacher(teach_sec),
+foreign key(year) references teacher(teach_year)
+)
