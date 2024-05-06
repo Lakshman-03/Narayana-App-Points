@@ -68,3 +68,36 @@ foreign key(sem) references teacher(teach_sem),
 foreign key(section) references teacher(teach_sec),
 foreign key(year) references teacher(teach_year)
 )
+
+
+select * from
+student 
+join teacher on student.section = teacher.teach_sec and teacher.teach_sem = student.sem and teacher.dept = student.branch;
+
+
+create table req_stack(
+id serial primary key,
+student_id varchar(10),
+currentSem varchar(5),
+activity text,
+location text,
+mode text,
+date date,
+first_selection text,
+second_selection text,
+apg varchar(5),
+approval_status varchar(10) default 'false',
+checking_team_status varchar(10) default 'false',
+image_name text,
+image_data bytea
+);
+
+SELECT rs.id, rs.student_id, rs.currentSem, rs.activity, rs.location, rs.mode, rs.date,
+       rs.first_selection, rs.second_selection, rs.apg, rs.approval_status, rs.checking_team_status,
+       rs.image_name, rs.image_data
+FROM req_stack rs
+JOIN student s ON rs.student_id = s.id
+JOIN teacher t ON s.branch = t.dept AND s.sem = t.teach_sem AND s.section = t.teach_sec
+WHERE t.email = 'Avinash@gmail.com'
+AND rs.approval_status = 'false'
+AND rs.checking_team_status = 'false';

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" type="text/css" href="/styles/req_stack.css">
+</head>
+
+<body>
+    <nav>
+        <img src="#">
+        <label class="title">APP(TEMP)</label>
+        <ul>
+            <li><a class="active" href="">DASH BOARD</a></li>
+            <li><a href="">ADD A STUDENT</a></li>
+            <li><a href="">DETAILS</a></li>
+            <li><a href="">ABOUT</a></li>
+            <li><a href="">PROFILE</a></li>
+        </ul>
+    </nav>
+    <main class="table" id="app_table">
+        <section class="table__header">
+            <div class="input-group">
+                <input type="search" placeholder="Search Here...">
+                <img src="./search.png" alt="">
+            </div>
+            <div class="select">
+                <button class="select-all" onclick="selected()">
+                    SELECT ALL
+                </button>
+            </div>
+            <div class="mini-select">
+                <button class="threeDotBtn" id="threeDotBtn"><span><i class="uil uil-ellipsis-v" id="threeDots"></i></span></button>
+            </div>
+            <div class="set">
+                <div class="contents">
+                    <ul>
+                        <li><a href="">Approve</a></li>
+                        <li><a href="">Reject</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <!-- Table headings -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <% locals.dataVal.forEach((student, index) => { %>
+                        <form action="/approve_reject" method="post" onclick="event.preventDefault()">
+                            <tr>
+                                <td><input type="checkbox" class="checkbox"></td>
+                                <td><span><%= student.student_id %></span></td>
+                                <td><span></span></td>
+                                <input type="hidden" name="student_id" value="<%= student.student_id %>">
+                                <input type="hidden" name="student_sem" value="<%= student.currentsem %>">
+                                <input type="hidden" name="location" value="<%= student.location %>">
+                                <input type="hidden" name="activity" value="<%= student.activity %>">
+                                <input type="hidden" name="mode" value="<%= student.mode %>">
+                                <input type="hidden" name="date" value="<%= student.date %>">
+                                <input type="hidden" name="first_selection" value="<%= student.first_selection %>">
+                                <input type="hidden" name="second_selection" value="<%= student.second_selection %>">
+                                <input type="hidden" name="apg" value="<%= student.apg %>">
+                                <input type="hidden" name="approval_status" value="True">
+                                <input type="hidden" name="image_name" value="<%= student.image_name %>">
+                                <td><button onclick="event.preventDefault()" class="viewbtn" data-index="<%= index %>"><span><i class="uil uil-eye"></i>view</span></button></td>
+                                <td><button class="Approve" type="submit" name="approval" value="accept">Approve</button></td>
+                                <td><button class="Reject" type="submit" name="approval" value="reject">Reject</button></td>
+                            </tr>
+                        </form>
+                        
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <% locals.dataVal.forEach((student, index) => { %>
+        <div id="myModal_<%= index %>" class="modal">
+            <div class="modal-content" id="dataCheck">
+                <span class="close">&times;</span>
+                <div class="modalContent">
+                    <img src="/images/<%= student.image_name %>" alt="" width="350" height="250">
+                </div>
+            </div>
+        </div>
+    <% }) %>
+
+    <script src="/static js/req_stack.js"></script>
+    
+    <script>
+        var viewBtns = document.querySelectorAll('.viewbtn');
+        var modals = document.querySelectorAll('.modal');
+
+        viewBtns.forEach(function(btn) {
+            btn.addEventListener("click", function() {
+                var index = this.getAttribute('data-index');
+                var modalId = "myModal_" + index;
+                var modal = document.getElementById(modalId);
+                modal.style.display = "block";
+            });
+        });
+
+        var closeBtns = document.querySelectorAll('.close');
+        closeBtns.forEach(function(btn) {
+            btn.addEventListener("click", function() {
+                var modal = this.parentElement.parentElement;
+                modal.style.display = "none";
+            });
+        });
+
+        window.onclick = function(event) {
+            modals.forEach(function(modal) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+        };
+       
+    </script>
+</body>
+
+</html>

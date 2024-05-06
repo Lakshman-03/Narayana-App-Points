@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/std_details.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <img src="#">
+        <label class="title">APP(TEMP)</label>
+        <ul>
+         <li><a class="active" href="./faculty.html">DASH BOARD</a></li>
+         <li><a href="">ADD STUDENT</a></li>
+         <li><a href="">DOWNLOAD</a></li>
+         <li><a href="">ABOUT</a></li>
+         <li><a href="">ACCOUNT</a></li>
+        </ul>
+ 
+     </nav>
+    <main class="table" id="app_table">
+        <section class="table__header">
+            <h1>STUDENT DETAILS</h1>
+            <div class="input-group">
+                <input type="search" placeholder="Search Here...">
+                <img src="./search.png" alt="">
+            </div>
+
+            <!-- <div class="pro__file">
+                <img for="pro-file" class="pro__file-btn" src="./gojo.jpeg">
+            </div> -->
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Id <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Student Name </th>
+                        <th>Year</th>
+                        <th> Semester</th>
+                        <th> Ph.No </th>
+                        <th> Email Id</th>
+                        <th> Request </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% locals.studentDataArray.forEach(student => { %>
+                        <tr>
+                            <td><span><%= student.id %>  </span></td>
+                            <td><span><%= student.name %> </span></td>
+                            <td> <span><%= student.year %> RD Year</span> </td>
+                            <td><span><%= student.sem %>Th Sem</span> </td>
+                            <td>
+                                <span><%= student.contact %> </span>
+                            </td>
+                            <td>
+                                <span><%= student.email %> </span>
+                            </td>
+                            <td> <button class="btn"><span class="points">req</span></button></td>
+                        </tr>
+                    <% }) %>
+                    
+                    <!-- <tr>
+                        <td><span>21711405F0</span></td>
+                        <td><span>Lakshman</span></td>
+                        <td> <span>3RD Year</span> </td>
+                        <td><span>2ND Sem</span> </td>
+                        <td>
+                            <span>9121316754</span>
+                        </td>
+                        <td>
+                            <span>lakshman@gmail.com</span>
+                        </td>
+                        <td> <button class="btn"><span class="points">req</span></button></td>
+                    </tr>
+                    <tr>
+                        <td><span>2171140563</span></td>
+                        <td><span>Rupesh</span></td>
+                        <td> <span>3RD Year</span> </td>
+                        <td><span>2ND Sem</span> </td>
+                        <td>
+                            <span>9121316755</span>
+                        </td>
+                        <td>
+                            <span>rupesh@gmail.com</span>
+                        </td>
+                        <td> <button class="btn"><span class="points">req</span></button></td>
+                    </tr>
+                    <tr>
+                        <td><span>2171140554</span></td>
+                        <td><span>Abhinav</span></td>
+                        <td> <span>3RD Year</span> </td>
+                        <td><span>2ND Sem</span> </td>
+                        <td>
+                            <span>9121316756</span>
+                        </td>
+                        <td>
+                            <span>abhinav@gmail.com</span>
+                        </td>
+                        <td> <button class="btn"><span class="points">req</span></button></td>
+                    </tr>
+                    <tr>
+                        <td><span>21711A0557</span></td>
+                        <td><span>Saketh</span></td>
+                        <td> <span>3RD Year</span> </td>
+                        <td><span>2ND Sem</span> </td>
+                        <td>
+                            <span>9121316758</span>
+                        </td>
+                        <td>
+                            <span>saketh@gmail.com</span>
+                        </td>
+                        <td> <button class="btn"><span class="points">req</span></button></td>
+                    </tr>
+                    <tr>
+                        <td><span>21711405J1</span></td>
+                        <td><span>Nishkal</span></td>
+                        <td> <span>3RD Year</span> </td>
+                        <td><span>2ND Sem</span> </td>
+                        <td>
+                            <span>9121316759</span>
+                        </td>
+                        <td>
+                            <span>nishkal@gmail.com</span>
+                        </td>
+                        <td><button class="btn"> <span class="points">req</span></button></td>
+                    </tr>
+                    <tr>
+                        <td><span>21711405J7</span></td>
+                        <td><span>Gnanadeep</span></td>
+                        <td> <span>3RD Year</span> </td>
+                        <td><span>2ND Sem</span> </td>
+                        <td>
+                            <span>9121316753</span>
+                        </td>
+                        <td>
+                            <span>gnanadeep@gmail.com</span>
+                        </td>
+                        <td><button class="btn"> <span class="points">req</span></button></td>
+                    </tr>
+                    <tr>
+                        <td><span>21711405J9</span></td>
+                        <td><span>Eren</span></td>
+                        <td> <span>3RD Year</span> </td>
+                        <td><span>2ND Sem</span> </td>
+                        <td>
+                            <span>9121316752</span>
+                        </td>
+                        <td>
+                            <span>eren@gmail.com</span>
+                        </td>
+                        <td> <button class="btn"><span class="points">req</span></button></td>
+                    </tr>
+                    <tr>
+                        <td><span>21711405K0</span></td>
+                        <td><span>Mikasa</span></td>
+                        <td> <span>3RD Year</span> </td>
+                        <td><span>2ND Sem</span> </td>
+                        <td>
+                            <span>9121316751</span>
+                        </td>
+                        <td>
+                            <span>mikasa@gmail.com</span>
+                        </td>
+                        <td><button class="btn"> <span class="points">req</span></button></td>
+                    </tr> -->
+                    
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <div class="sem-total">
+        <p>TOTAL STRENGTH : <span>9</span></p>
+    </div>
+
+    
+      
+    <script src="./details.js"></script>
+</body>
+</html>

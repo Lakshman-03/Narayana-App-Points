@@ -6,6 +6,9 @@ import session from "express-session";
 import multer from "multer";
 import passport from "passport";
 import { Strategy } from "passport-local";
+import fs from 'fs';
+import path from 'path';
+import mailSend from "./mailSender.js";
 const app = express();
 const port = 3000;
 env.config();
@@ -60,7 +63,7 @@ app.get("/Authentication",(req,res)=>{
 )
 app.get("/Teacher-Authentication",(req,res)=>{
     if(req.isAuthenticated()){
-      res.render("welcome.ejs",{name:req.user.name})
+      res.render("Tdashboard.ejs",{name:req.user.name})
     }else{
       res.redirect("/")
     }
@@ -71,7 +74,7 @@ app.get("/profile",async(req,res)=>{
         const userData = req.user;
         const result= await db.query("select * from app where student_id = $1",[userData.id])
         let prog = result.rows[0]
-        console.log(prog)
+        console.log(userData)
         let percent  = (prog.totalapp/160)*100
     
         res.render("profile.ejs",{
@@ -100,7 +103,7 @@ app.get("/profile",async(req,res)=>{
 app.get("/details",async(req,res)=>{
     try{
     const userData2 = req.user;
-    const result =    await db.query("select * from certificate where  student_id = $1;",[userData2.id])
+    const result =    await db.query("select * from certificate2 where  student_id = $1;",[userData2.id])
     console.log(result.rows)
      const c= 0
      var t = 0
@@ -131,6 +134,62 @@ app.get("/logout",(req,res)=>{
         res.redirect("/")
     });
 })
+app.get("/std_details",async(req,res)=>{
+    try{
+    console.log(req.user.email);
+    const results = await db.query("select * from teacher join student on student.section = teacher.teach_sec and teacher.teach_sem = student.sem and teacher.dept = student.branch and teacher.email = $1;", [req.user.email]);
+    const studentsData = results.rows
+    console.log(studentsData)
+    res.render("Tstudents.ejs",{
+        studentDataArray : studentsData
+    });
+    }
+    catch(error){
+        console.log("error fetching student details.")
+    }
+    
+})
+app.get("/Trequest",async(req,res)=>{
+   const result = await db.query("SELECT rs.id, rs.student_id, rs.currentSem, rs.activity, rs.location, rs.mode, rs.date, rs.first_selection, rs.second_selection, rs.apg, rs.approval_status, rs.checking_team_status,  rs.image_name, rs.image_data FROM req_stack rs JOIN student s ON rs.student_id = s.id  JOIN teacher t ON s.branch = t.dept AND s.sem = t.teach_sem AND s.section = t.teach_sec  WHERE t.email = $1 AND rs.approval_status = 'false' AND rs.checking_team_status = 'false';",[req.user.email])
+   const val = result.rows
+//    console.log(val);
+    res.render("Trequest.ejs",{dataVal :val})
+})
+
+app.get("/approve_reject",(req,res)=>{
+    res.render("Trequest.ejs")
+})
+
+app.post("/approve_reject", async (req, res) => {
+    try {
+        console.log(req.body);
+        if(req.body.approval === "reject")
+        {
+            const requestData = await db.query("SELECT * FROM req_stack WHERE image_name = $1", [req.body.image_name]);
+            const request = requestData.rows[0];
+            const studentData = await db.query("SELECT email FROM student WHERE id = $1", [request.student_id]);
+            const studentEmail = studentData.rows[0].email;
+            mailSend(studentEmail,"Your App points certificate got rejected due to some reason please contact your corresponding faculty.");
+            await db.query("DELETE FROM req_stack WHERE image_name = $1", [req.body.image_name]);
+        } 
+        else if (req.body.approval === "accept") 
+        {
+            const requestData = await db.query("SELECT * FROM req_stack WHERE image_name = $1", [req.body.image_name]);
+            const request = requestData.rows[0];
+            const studentData = await db.query("SELECT email FROM student WHERE id = $1", [request.student_id]);
+            const studentEmail = studentData.rows[0].email;
+            mailSend(studentEmail,"Your App points are successfully got verified.");
+            await db.query("INSERT INTO certificate2 (student_id, currentSem, activity, location, mode, date, first_selection, second_selection, apg, image_name, image_data,approval_status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,$12)",
+                [request.student_id, 6, request.activity, request.location, request.mode, request.date, request.first_selection, request.second_selection, request.apg, request.image_name, request.image_data,'True']
+            );
+            await db.query("DELETE FROM req_stack WHERE image_name = $1", [req.body.image_name]);
+        }
+        res.redirect("/Trequest");
+    } catch (error) {
+        console.error("Error processing request:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
 
 // app.post("/student-login",passport.authenticate("local",{
 //     successRedirect:"/Authentication",
@@ -155,10 +214,26 @@ app.post("/student-login", (req, res, next) => {
         });
     })(req, res, next);
 });
-app.post("/request123",upload.single('image'),(req,res)=>{
-    
-    console.log(req.body);
+app.post("/request123", upload.single('image'), async(req, res) => {
+    const file = req.file;
+    const studentID = req.user.id;
+    const result = await db.query("SELECT id FROM certificate2 ORDER BY id DESC;")
+    const result2 =  await db.query("SELECT id FROM req_stack ORDER BY id DESC;")
+    const ren = result.rows[0].id
+    const ren2 = result2.rows[0].id+1
+    const sum = ren+ren2
+    const newFilename = `${studentID}${sum}.${file.originalname.split('.').pop()}`;
+    fs.rename(file.path, path.join(file.destination, newFilename), (err) => {
+        if (err) {
+            console.error("Error renaming file:", err);
+            return res.status(500).send("Error renaming file");
+        }
+        console.log("File renamed successfully");
+        res.status(200).send("File uploaded and renamed successfully");
+    });
+    await db.query("INSERT INTO req_stack (student_id, currentSem, activity, location, mode, date, first_selection, second_selection, apg, image_name, image_data) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11); ",[req.user.id,6,req.body.activity,req.body.location,req.body.mode,req.body.date,req.body.firstSelection,req.body.secondSelection, 5, newFilename, req.file.image_data])
 });
+
 
 app.post("/teacher-login",(req,res,next)=>{
     passport.authenticate("teacher-local", (err, user, info) => {
@@ -236,7 +311,7 @@ passport.use("teacher-local",new Strategy(async function verify(username, passwo
         } else {
              data = result.rows[0];
             if (password == data.password) {
-                console.log(data)
+                // console.log(data)
                 return cb(null, data);
             } else {
                 return cb(null, false, { message: "Incorrect password" });

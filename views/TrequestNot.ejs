@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" type="text/css" href="/styles/req_stack.css">
+</head>
+
+<body>
+    <nav>
+        <img src="#">
+        <label class="title">APP(TEMP)</label>
+        <ul>
+         <li><a class="active" href="">DASH BOARD</a></li>
+         <li><a href="">ADD A STUDENT</a></li>
+         <li><a href="">DETAILS</a></li>
+         <li><a href="">ABOUT</a></li>
+         <li><a href="">PROFILE</a></li>
+        </ul>
+ 
+     </nav>
+    <main class="table" id="app_table">
+        <section class="table__header">
+           
+            <div class="input-group">
+                <input type="search" placeholder="Search Here...">
+                <img src="./search.png" alt="">
+            </div>
+            <div class="select">
+                <button class="select-all" onclick="selected()">
+                    SELECT ALL
+                </button>
+            </div>
+            <div class="mini-select">
+                <button class="threeDotBtn" id="threeDotBtn"><span><i class="uil uil-ellipsis-v" id="threeDots"></i></span></button>
+            </div>
+            <div class="set">
+                <div class="contents">
+                    <ul>
+                        <li><a href="">Approve</a></li>
+                        <li><a href="">Reject</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="table__body">
+            <table>
+                <!-- <thead>
+                    <tr>
+                        <th> </th>
+                        <th> </th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead> -->
+                <thead>
+                    <tr>
+                        <!-- <th> </th>
+                        <th colspan="2">ALL</th>
+                        <th colspan="2">APPROVED</th>
+                        <th colspan="2">REJECTED</th>
+                       -->
+                    </tr>
+                <tbody>
+                    <% locals.dataVal.forEach(student => { %>
+                    <tr>
+                        <td><input type="checkbox" id="checkbox" class="checkbox"></td>
+                        <td><span><%= student.student_id   %> <%= student.image_name %></span></td>
+                        <!-- <td><img src="/images/<%#= student.image_name %>" alt=""></td> -->
+                        <td> <span></span> </td>
+                        <td ><button class="viewbtn" id="viewbtn"><span><i class="uil uil-eye" id="index"></i>view</span> </button></td>
+                        <td>
+                           <button  class="Approve" id="Approve">Approve</button>
+                        </td>
+                        <td>  <button  class="Reject" id="Reject">Reject</button></td>
+                    </tr>
+                    <!-- <div id="myModal" class="modal">
+                        <div class="modal-content">
+                          <span class="close">&times;</span>
+                          <div class="modalContent">
+                            <p>"/images/<%#= student.image_name %>"</p>
+                            <img src="/images/<%#= student.image_name %>" alt="" width="350" height="250">
+                        </div>
+                        </div>
+                       
+                      </div> -->
+                    <% }) %>
+                    <!-- <tr>
+                        <td><input type="checkbox" id="checkbox" class="checkbox"></td>
+                        <td><span>21711A05F0</span></td>
+                        <td> <span></span> </td>
+                        <td><button class="viewbtn" id="viewbtn"><span><i class="uil uil-eye"></i>view</span></button> </td>
+                        <td>
+                           <button  class="Approve" id="Approve">Approve</button>
+                        </td>
+                        <td>  <button  class="Reject" id="Reject">Reject</button></td>
+                    </tr>
+                   
+
+                    <tr>
+                        <td><input type="checkbox" id="checkbox" class="checkbox"></td>
+                        <td><span>21711A0562</span></td>
+                        <td> <span></span> </td>
+                        <td><button class="viewbtn" id="viewbtn"><span><i class="uil uil-eye"></i>view</span> </button></td>
+                        <td>
+                           <button  class="Approve" id="Approve">Approve</button>
+                        </td>
+                        <td>  <button  class="Reject" id="Reject">Reject</button></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="checkbox" id="checkbox" class="checkbox"></td>
+                        <td><span>21711A0563</span></td>
+                        <td> <span></span> </td>
+                        <td ><button class="viewbtn" id="viewbtn"><span><i class="uil uil-eye"></i>view</span> </button></td>
+                        <td>
+                           <button  class="Approve" id="Approve">Approve</button>
+                        </td>
+                        <td>  <button  class="Reject" id="Reject">Reject</button></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="checkbox" id="checkbox" class="checkbox"></td>
+                        <td><span>21711A0548</span></td>
+                        <td> <span></span> </td>
+                        <td ><button class="viewbtn" id="viewbtn"><span><i class="uil uil-eye"></i>view</span> </button></td>
+                        <td>
+                           <button  class="Approve" id="Approve">Approve</button>
+                        </td>
+                        <td>  <button  class="Reject" id="Reject">Reject</button></td>
+                    </tr> -->
+             
+                   
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <% locals.dataVal.forEach(student => { %>
+        
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div class="modalContent">
+                        <img src="/images/<%= student.image_name %>" alt="" width="350" height="250">
+                    </div>
+                </div>
+            </div>
+
+    
+    <% }) %>
+      
+      
+    <script src="/static js/req_stack.js"></script>
+
+</body>
+
+</html>
+
